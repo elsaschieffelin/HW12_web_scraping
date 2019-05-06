@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 278,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -21,7 +21,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 282,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -30,32 +30,33 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 283,
    "metadata": {},
    "outputs": [],
    "source": [
-    "def scrape(): \n",
-    "    mission={}\n",
-    "    url_news='https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'\n",
-    "    browser.visit(url_news)\n",
-    "    soup = bs(browser.html, 'html.parser')\n",
-    "    mission['news_title'] = soup.find_all('div', class_='content_title')[0].text\n",
-    "    mission['news_p'] = soup.find_all('div', class_='article_teaser_body')[0].text\n",
-    "    return mission"
+    "url_news='https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'\n",
+    "browser.visit(url_news)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 284,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "soup = bs(browser.html, 'html.parser')\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 285,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def mars_news(): \n",
+    "    news['news_title'] = soup.find_all('div', class_='content_title')[0].text\n",
+    "    news_p = soup.find_all('div', class_='article_teaser_body')[0].text\n",
+    "    return news"
    ]
   },
   {
@@ -67,7 +68,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 265,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -77,7 +78,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
+   "execution_count": 275,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -86,7 +87,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 268,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -106,7 +107,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 18,
+   "execution_count": 269,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -116,7 +117,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 19,
+   "execution_count": 271,
    "metadata": {
     "scrolled": false
    },
@@ -127,11 +128,21 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 20,
+   "execution_count": 272,
    "metadata": {
     "scrolled": true
    },
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "InSight sol 154 (2019-05-03) low -97.6ºC (-143.7ºF) high -17.2ºC (1.0ºF)\n",
+      "winds from the SW at 4.5 m/s (10.0 mph) gusting to 13.1 m/s (29.2 mph)\n",
+      "pressure at 7.40 hPa\n"
+     ]
+    }
+   ],
    "source": [
     "def mars_weather():\n",
     "    tweet = soup.find_all('p', class_='TweetTextSize TweetTextSize--normal js-tweet-text tweet-text')[0].text[0:-26]\n",
@@ -147,7 +158,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 27,
+   "execution_count": 273,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -157,7 +168,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 28,
+   "execution_count": 274,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -166,7 +177,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 29,
+   "execution_count": 276,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -193,30 +204,28 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 34,
+   "execution_count": 277,
    "metadata": {},
    "outputs": [],
    "source": [
-    "def hemispheres():\n",
-    "    x=0\n",
-    "    hemisphere_image_urls= []\n",
-    "    image_urls = ['https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced', 'https://astrogeology.usgs.gov/search/map/Mars/Viking/schiaparelli_enhanced', 'https://astrogeology.usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced', 'https://astrogeology.usgs.gov/search/map/Mars/Viking/valles_marineris_enhanced']\n",
-    "    for url in image_urls: \n",
-    "        dict_hemi = {}\n",
-    "        url=image_urls[x]\n",
-    "        browser.visit(url)\n",
-    "        soup = bs(browser.html, 'html.parser')\n",
-    "        img_url = soup.find_all('a', target='_blank')[0]['href']\n",
-    "        img_title = soup.find('h2', class_='title').text[0:-9]\n",
-    "        dict_hemi = {'title': img_title, 'img_url': img_url}\n",
-    "        hemisphere_image_urls.append(dict_hemi)\n",
-    "        x = x+1\n",
-    "    return hemisphere_image_urls"
+    "x=0\n",
+    "hemisphere_image_urls= []\n",
+    "\n",
+    "for url in image_urls: \n",
+    "    dict_hemi = {}\n",
+    "    url=image_urls[x]\n",
+    "    browser.visit(url)\n",
+    "    soup = bs(browser.html, 'html.parser')\n",
+    "    img_url = soup.find_all('a', target='_blank')[0]['href']\n",
+    "    img_title = soup.find('h2', class_='title').text[0:-9]\n",
+    "    dict_hemi = {'title': img_title, 'img_url': img_url}\n",
+    "    hemisphere_image_urls.append(dict_hemi)\n",
+    "    x = x+1\n"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 35,
+   "execution_count": 250,
    "metadata": {},
    "outputs": [],
    "source": [

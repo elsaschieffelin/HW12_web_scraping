@@ -6,7 +6,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 from flask import Flask, render_template, redirect
-import mars
+import mission_to_mars
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = "mongodb://localhost:27017/mars_app"
@@ -20,7 +20,7 @@ def index():
 @app.route('/scrape')
 def scraper(): 
     mission = mongo.db.mission
-    mars_data= mars.scrape()
+    mars_data= mission_to_mars.scrape()
     mongo.db.mission.update({}, mars_data, upsert=True)
     return redirect ('/', code = 302)
 

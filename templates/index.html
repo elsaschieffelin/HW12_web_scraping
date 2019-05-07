@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
     
-    <link rel='stylesheet2' href='my_style.css'>
+
     <title>Mars Data</title>
 </head>
 <body>
@@ -41,7 +41,41 @@
         <div class='row'>
             <div class='col-md-12'>
                 <h4>Mars Hemispheres</h4>
-                <p> {{mission.hemisphere_image_urls}}</p>
+            </div>
+        </div>
+        <div class = 'row'>
+            <div class = 'col-md-6'>
+                <div class="card" style="width: 30rem;">
+                    <img class="card-img-top" src=" {{mission.hemisphere_image_urls.0.img_url}} " alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">{{mission.hemisphere_image_urls.0.title}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class = 'col-md-6'>
+                <div class="card" style="width: 30rem;">
+                    <img class="card-img-top" src=" {{mission.hemisphere_image_urls.1.img_url}} " alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">{{mission.hemisphere_image_urls.1.title}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = 'row'>
+            <div class = 'col-md-6'>
+                <div class="card" style="width: 30rem;">
+                    <img class="card-img-top" src=" {{mission.hemisphere_image_urls.2.img_url}} " alt="Card image cap">                        <div class="card-body">
+                        <p class="card-text">{{mission.hemisphere_image_urls.2.title}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class = 'col-md-6'>
+                <div class="card" style="width: 30rem;">
+                    <img class="card-img-top" src=" {{mission.hemisphere_image_urls.3.img_url}} " alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">{{mission.hemisphere_image_urls.3.title}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
